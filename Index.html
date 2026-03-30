@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise 🎉</title><style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  overflow-x: hidden;
+}
+
+.page { display: none; padding: 20px; }
+.active { display: block; }
+
+h2, h3 {
+  color: #333;
+}
+
+button {
+  background: #007BFF;
+  color: white;
+  padding: 14px;
+  width: 90%;
+  max-width: 300px;
+  margin: 8px auto;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+input {
+  padding: 12px;
+  width: 85%;
+  max-width: 300px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+</style></head><body>
+<canvas id="fireworks"></canvas><div id="page1" class="page active">
+<h2>Hey! Birthday boy there is a surprise for you 🥳🎉</h2>
+<p>But first promise me you read all the slides</p>
+<button onclick="nextPage(2)">Agree</button>
+</div><div id="page2" class="page">
+<h3>Choose your options for better experience</h3>
+<p>Click on every option one after another »</p><button onclick="showWish(1)">1. English</button> <button onclick="showWish(2)">2. Hindi</button> <button onclick="showWish(3)">3. Bengali</button> <button onclick="showWish(4)">4. Gujarati</button> <button onclick="showWish(5)">5. Tamil</button> <button onclick="showWish(6)">6. Japanese</button> <button onclick="showWish(7)">7. Arabic</button> <button onclick="showWish(8)">8. Greek</button> <button onclick="showWish(9)">9. Odia</button> <button onclick="showWish(10)">10. Computer language 😉</button>
+
+</div><div id="wish" class="page">
+<h2 id="wishText"></h2>
+<button id="nextBtn" style="display:none;" onclick="nextPage(3)">Next</button>
+</div><div id="page3" class="page">
+<h3>How is it?</h3>
+<input type="text" placeholder="Write your opinion here"><br><br>
+<button onclick="alert('Thank you ❤️')">Send</button>
+</div><script>
+function nextPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page' + page).classList.add('active');
+}
+
+function showWish(num) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('wish').classList.add('active');
+
+  let text = "";
+
+  switch(num) {
+    case 1:
+      text = "Happy Birthday 🎁🎈<br>» Dyuti Sundar Dutta";
+      break;
+    case 2:
+      text = "जन्मदिन का हार्दिक शुभकामनाएं 🎁🎈<br>» द्युति सुंदर दत्ता";
+      break;
+    case 3:
+      text = "শুভ জন্মদিন 🎁🎈<br>» দ্যুতি সুন্দর দত্ত";
+      break;
+    case 4:
+      text = "Happy Birthday 🎂🎈<br>» દ્યુતિ સુંદર દત્તા";
+      break;
+    case 5:
+      text = "Happy Birthday 🎁🎈<br>» தியுதி சுந்தர் தத்தா";
+      break;
+    case 6:
+      text = "Happy Birthday 🎈🎂<br>» デュティ・スンダル・ダッタ";
+      break;
+    case 7:
+      text = "Happy Birthday 🎈🎂<br>» ديوتي سوندار داتا";
+      break;
+    case 8:
+      text = "Happy Birthday 🎈🎂<br>» Ντιούτι Σούνταρ Ντάτα";
+      break;
+    case 9:
+      text = "Happy Birthday 🎈🎂<br>» ଦ୍ୟୁତି ସୁନ୍ଦର ଦତ୍ତ";
+      break;
+    case 10:
+      text = `Happy Birthday 🎂🎈<br>
+      » 01000100 01111001 01110101 01110100 01101001 00100000 01110011 01110101 01101110 01100100 01100001 01110010 00100000 01000100 01110101 01110100 01110100 01100001`;
+      document.getElementById("nextBtn").style.display = "inline-block";
+      break;
+  }
+
+  document.getElementById("wishText").innerHTML = text;
+  if(num !== 10) document.getElementById("nextBtn").style.display = "none";
+
+  launchFireworks();
+}
+
+// FIREWORK ANIMATION
+const canvas = document.getElementById('fireworks');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+function launchFireworks() {
+  for (let i = 0; i < 80; i++) {
+    particles.push({
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      dx: (Math.random() - 0.5) * 6,
+      dy: (Math.random() - 0.5) * 6,
+      life: 100
+    });
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach((p, i) => {
+    p.x += p.dx;
+    p.y += p.dy;
+    p.life--;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (p.life <= 0) particles.splice(i, 1);
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script></body>
+</html>
