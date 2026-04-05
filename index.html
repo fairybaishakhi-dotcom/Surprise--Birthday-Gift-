@@ -1,154 +1,176 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Birthday Surprise 🎉</title><style>
+<title>Birthday Surprise</title>
+
+<style>
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Arial;
+  text-align: center;
+  background: black;
+  color: white;
   overflow: hidden;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
 }
 
-.page { display: none; height: 100vh; justify-content: center; align-items: center; }
-.active { display: flex; }
+.page { display: none; }
+.active { display: block; }
 
-.center { text-align: center; }
+/* Glitter effect */
+.glitter {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(white 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: sparkle 3s linear infinite;
+  opacity: 0.3;
+}
 
+@keyframes sparkle {
+  from { transform: translateY(0); }
+  to { transform: translateY(20px); }
+}
+
+/* Button */
 button {
-  background: #007BFF;
+  background: blue;
   color: white;
-  padding: 12px 18px;
+  padding: 12px;
   border: none;
-  border-radius: 10px;
-  margin-top: 20px;
+  margin: 10px;
+  width: 80%;
+  border-radius: 8px;
 }
 
-/* BALLOONS */
+/* Balloon */
 .balloon {
-  position: absolute;
-  bottom: -100px;
-  width: 40px;
-  height: 50px;
-  border-radius: 50%;
-  animation: float 6s linear infinite;
-}
-
-@keyframes float {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-120vh); }
-}
-
-.tapBalloon {
-  width: 100px;
-  height: 120px;
-  background: red;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-weight: bold;
-  margin: auto;
+  font-size: 60px;
+  margin-top: 150px;
   cursor: pointer;
 }
 
-.flash {
-  font-size: 24px;
-  animation: flicker 0.3s infinite alternate;
+/* Fireworks canvas */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-@keyframes flicker {
-  from { opacity: 0.5; }
-  to { opacity: 1; }
+/* Image full screen */
+.fullimg {
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
 }
+</style>
+</head>
 
-img {
-  max-width: 100%;
-  max-height: 80vh;
-}
+<body>
 
-</style></head><body><!-- PAGE 1 --><div id="page1" class="page active">
-<div class="center">
-<div id="balloons"></div><div class="tapBalloon" onclick="reveal()">Tap me 🎈</div><h2 id="surpriseText" style="display:none;" class="flash">
-Happy Birthday Dyuti Da 🎈🎂🎉
-</h2><button id="next1" style="display:none;" onclick="nextPage(2)">Next</button>
+<div class="glitter"></div>
+<canvas id="fireworks"></canvas>
 
+<!-- PAGE 1 -->
+<div id="p1" class="page active">
+  <div class="balloon" onclick="boom()">🎈<br>Tap me</div>
+  <h2 id="text"></h2>
+  <button onclick="go(2)">Next</button>
 </div>
-</div><!-- PAGE 2 --><div id="page2" class="page">
-<div class="center">
-<h3>Choose your options</h3>
-<button onclick="showWish(1)">1. English</button><br>
-<button onclick="showWish(2)">2. Hindi</button><br>
-<button onclick="showWish(3)">3. Bengali</button><br>
-<button onclick="showWish(4)">4. Gujarati</button><br>
-<button onclick="showWish(5)">5. Tamil</button><br>
-<button onclick="showWish(6)">6. Japanese</button><br>
-<button onclick="showWish(7)">7. Arabic</button><br>
-<button onclick="showWish(8)">8. Greek</button><br>
-<button onclick="showWish(9)">9. Odia</button><br>
-<button onclick="showWish(10)">10. Computer language 😉</button>
+
+<!-- PAGE 2 -->
+<div id="p2" class="page">
+  <h2>Hey! Birthday boy there is a surprise 🥳🎉</h2>
+  <p>Promise me you read all slides</p>
+  <button onclick="go(3)">Agree</button>
 </div>
-</div><!-- WISH PAGE --><div id="wish" class="page">
-<div class="center">
-<h2 id="wishText"></h2>
-<button onclick="nextPage(2)">⬅ Back</button>
-<button id="nextBtn" style="display:none;" onclick="nextPage(3)">Next</button>
+
+<!-- OPTIONS -->
+<div id="p3" class="page">
+  <h3>Choose your options</h3>
+
+  <button onclick="go(4)">1. English</button>
+  <button onclick="go(5)">2. Hindi</button>
+  <button onclick="go(6)">3. Bengali</button>
+  <button onclick="go(7)">4. Gujarati</button>
+  <button onclick="go(8)">5. Tamil</button>
+  <button onclick="go(9)">6. Japanese</button>
+  <button onclick="go(10)">7. Arabic</button>
+  <button onclick="go(11)">8. Greek</button>
+  <button onclick="go(12)">9. Odia</button>
+  <button onclick="go(13)">10. Computer</button>
 </div>
-</div><!-- LAST PAGE --><div id="page3" class="page">
-<div class="center">
-<img src="your-image.jpg" alt="Birthday">
-<br>
-<button onclick="nextPage(1)">Go to Start</button>
+
+<!-- LANG PAGES -->
+<div id="p4" class="page"><h1>Happy Birthday 🎁🎈<br>» Dyuti Sundar Dutta</h1></div>
+<div id="p5" class="page"><h1>जन्मदिन मुबारक 🎁🎈<br>» द्युति सुंदर दत्ता</h1></div>
+<div id="p6" class="page"><h1>শুভ জন্মদিন 🎁🎈<br>» দ্যুতি সুন্দর দত্ত</h1></div>
+<div id="p7" class="page"><h1>Happy Birthday 🎂🎈<br>» દ્યુતિ સુંદર દત્તા</h1></div>
+<div id="p8" class="page"><h1>Happy Birthday 🎁🎈<br>» தியுதி சுந்தர் தத்தா</h1></div>
+<div id="p9" class="page"><h1>Happy Birthday 🎈🎂<br>» デュティ・スンダル・ダッタ</h1></div>
+<div id="p10" class="page"><h1>Happy Birthday 🎈🎂<br>» ديوتي سوندار داتا</h1></div>
+<div id="p11" class="page"><h1>Happy Birthday 🎈🎂<br>» Ντιούτι Σούνταρ Ντάτα</h1></div>
+<div id="p12" class="page"><h1>Happy Birthday 🎈🎂<br>» ଦ୍ୟୁତି ସୁନ୍ଦର ଦତ୍ତ</h1></div>
+
+<!-- COMPUTER -->
+<div id="p13" class="page">
+<h2>Happy Birthday 🎂🎈</h2>
+<p>01000100 01111001 01110101 01110100 ...</p>
+<button onclick="go(14)">Next</button>
 </div>
-</div><script>
-function nextPage(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page' + page).classList.add('active');
+
+<!-- IMAGE PAGE -->
+<div id="p14" class="page">
+  <!-- Image.jpg -->
+  <img src="photo.jpg" class="fullimg">
+  <br>
+  <button onclick="go(1)">Restart</button>
+</div>
+
+<script>
+function go(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
 }
 
-function reveal() {
-  document.getElementById('surpriseText').style.display = 'block';
-  document.getElementById('next1').style.display = 'block';
+/* Balloon click */
+function boom(){
+  document.getElementById("text").innerHTML =
+  "🎉 Happy Birthday Dyuti Da 🎂🎈🎉";
+  fire();
 }
 
-function showWish(num) {
-  nextPage('wish');
-  let text = "";
+/* Fireworks */
+const c = document.getElementById("fireworks");
+const ctx = c.getContext("2d");
 
-  switch(num) {
-    case 1: text = "Happy Birthday 🎁🎈<br>» Dyuti Sundar Dutta"; break;
-    case 2: text = "जन्मदिन मुबारक 🎁🎈"; break;
-    case 3: text = "শুভ জন্মদিন 🎁🎈"; break;
-    case 4: text = "Happy Birthday 🎂🎈"; break;
-    case 5: text = "Happy Birthday 🎁🎈"; break;
-    case 6: text = "Happy Birthday 🎈🎂"; break;
-    case 7: text = "Happy Birthday 🎈🎂"; break;
-    case 8: text = "Happy Birthday 🎈🎂"; break;
-    case 9: text = "Happy Birthday 🎈🎂"; break;
-    case 10:
-      text = "Happy Birthday 🎂🎈<br>01000100 01111001";
-      document.getElementById("nextBtn").style.display = "block";
-      break;
+c.width = window.innerWidth;
+c.height = window.innerHeight;
+
+function fire(){
+  for(let i=0;i<60;i++){
+    let x = c.width/2;
+    let y = c.height/2;
+    let dx = (Math.random()-0.5)*8;
+    let dy = (Math.random()-0.5)*8;
+    particle(x,y,dx,dy);
   }
-
-  document.getElementById("wishText").innerHTML = text;
-  if(num !== 10) document.getElementById("nextBtn").style.display = "none";
 }
 
-// create floating balloons
-for(let i=0;i<15;i++){
-  let b = document.createElement('div');
-  b.className = 'balloon';
-  b.style.left = Math.random()*100+'vw';
-  b.style.background = `hsl(${Math.random()*360},70%,60%)`;
-  b.style.animationDuration = (4+Math.random()*3)+'s';
-  document.getElementById('balloons').appendChild(b);
+function particle(x,y,dx,dy){
+  let life=50;
+  function draw(){
+    if(life<=0) return;
+    ctx.fillStyle="white";
+    ctx.fillRect(x,y,2,2);
+    x+=dx; y+=dy; life--;
+    requestAnimationFrame(draw);
+  }
+  draw();
 }
-</script></body>
+</script>
+
+</body>
 </html>
-
     
-
-  
-
