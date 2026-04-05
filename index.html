@@ -2,175 +2,234 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise</title>
+<title>Royal Birthday Surprise</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  text-align: center;
-  background: black;
-  color: white;
-  overflow: hidden;
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background: radial-gradient(circle at top,#1a1a2e,#0f3460,#000);
+    color:#fff;
+    overflow:hidden;
 }
 
-.page { display: none; }
-.active { display: block; }
+/* PAGE */
+.page{
+    display:none;
+    height:100vh;
+    width:100%;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+}
+.active{display:flex;}
 
-/* Glitter effect */
-.glitter {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(white 1px, transparent 1px);
-  background-size: 20px 20px;
-  animation: sparkle 3s linear infinite;
-  opacity: 0.3;
+/* ROYAL CARD */
+.card{
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(18px);
+    padding:35px;
+    border-radius:25px;
+    box-shadow:0 0 60px rgba(255,215,0,0.2);
+    border:1px solid rgba(255,215,0,0.3);
 }
 
-@keyframes sparkle {
-  from { transform: translateY(0); }
-  to { transform: translateY(20px); }
+/* TITLE */
+h1{
+    font-family:'Playfair Display',serif;
+    font-size:45px;
+    color:gold;
+    text-shadow:0 0 20px gold;
 }
 
-/* Button */
-button {
-  background: blue;
-  color: white;
-  padding: 12px;
-  border: none;
-  margin: 10px;
-  width: 80%;
-  border-radius: 8px;
+/* BUTTON */
+.btn{
+    margin:10px;
+    padding:12px 25px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(45deg,#d4af37,#ffd700);
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+.btn:hover{
+    transform:scale(1.1);
 }
 
-/* Balloon */
-.balloon {
-  font-size: 60px;
-  margin-top: 150px;
-  cursor: pointer;
+/* BALLOONS */
+.balloon{
+    position:absolute;
+    bottom:-100px;
+    width:50px;
+    height:70px;
+    border-radius:50%;
+    animation:float 10s infinite;
+}
+@keyframes float{
+    0%{transform:translateY(0);}
+    100%{transform:translateY(-120vh);}
 }
 
-/* Fireworks canvas */
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
+/* GLITTER */
+.sparkle{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 2s infinite;
+}
+@keyframes twinkle{
+    0%,100%{opacity:0;}
+    50%{opacity:1;}
 }
 
-/* Image full screen */
-.fullimg {
-  width: 100vw;
-  height: 100vh;
-  object-fit: contain;
+/* FIREWORK */
+.firework{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:gold;
+    border-radius:50%;
+    animation:explode 1.5s infinite;
+}
+@keyframes explode{
+    0%{transform:scale(1);opacity:1;}
+    100%{transform:scale(12);opacity:0;}
+}
+
+/* IMAGE */
+img{
+    width:85%;
+    max-width:400px;
+    border-radius:20px;
+    box-shadow:0 0 25px gold;
 }
 </style>
 </head>
 
 <body>
 
-<div class="glitter"></div>
-<canvas id="fireworks"></canvas>
+<audio autoplay loop>
+<source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
+</audio>
 
 <!-- PAGE 1 -->
-<div id="p1" class="page active">
-  <div class="balloon" onclick="boom()">🎈<br>Tap me</div>
-  <h2 id="text"></h2>
-  <button onclick="go(2)">Next</button>
+<div id="page1" class="page active">
+<div class="card">
+<h1 id="type"></h1>
+<p>But first of all promise me you read all the slides</p>
+<button class="btn" onclick="nextPage('page2')">Agree</button>
+</div>
 </div>
 
 <!-- PAGE 2 -->
-<div id="p2" class="page">
-  <h2>Hey! Birthday boy there is a surprise 🥳🎉</h2>
-  <p>Promise me you read all slides</p>
-  <button onclick="go(3)">Agree</button>
+<div id="page2" class="page">
+<div class="card">
+<p>Click on every options one after another »</p>
+
+<button class="btn" onclick="wish(1)">1. English</button><br>
+<button class="btn" onclick="wish(2)">2. Hindi</button><br>
+<button class="btn" onclick="wish(3)">3. Bengali</button><br>
+<button class="btn" onclick="wish(4)">4. Gujarati</button><br>
+<button class="btn" onclick="wish(5)">5. Tamil</button><br>
+<button class="btn" onclick="wish(6)">6. Japanese</button><br>
+<button class="btn" onclick="wish(7)">7. Arabic</button><br>
+<button class="btn" onclick="wish(8)">8. Greek</button><br>
+<button class="btn" onclick="wish(9)">9. Odia</button><br>
+<button class="btn" onclick="wish(10)">10. Computer language 😉</button>
+
+</div>
 </div>
 
-<!-- OPTIONS -->
-<div id="p3" class="page">
-  <h3>Choose your options</h3>
-
-  <button onclick="go(4)">1. English</button>
-  <button onclick="go(5)">2. Hindi</button>
-  <button onclick="go(6)">3. Bengali</button>
-  <button onclick="go(7)">4. Gujarati</button>
-  <button onclick="go(8)">5. Tamil</button>
-  <button onclick="go(9)">6. Japanese</button>
-  <button onclick="go(10)">7. Arabic</button>
-  <button onclick="go(11)">8. Greek</button>
-  <button onclick="go(12)">9. Odia</button>
-  <button onclick="go(13)">10. Computer</button>
+<!-- WISH PAGE -->
+<div id="wishPage" class="page">
+<div class="card">
+<h1 id="wishText"></h1>
+<button class="btn" onclick="nextPage('imagePage')">Next</button>
 </div>
-
-<!-- LANG PAGES -->
-<div id="p4" class="page"><h1>Happy Birthday 🎁🎈<br>» Dyuti Sundar Dutta</h1></div>
-<div id="p5" class="page"><h1>जन्मदिन मुबारक 🎁🎈<br>» द्युति सुंदर दत्ता</h1></div>
-<div id="p6" class="page"><h1>শুভ জন্মদিন 🎁🎈<br>» দ্যুতি সুন্দর দত্ত</h1></div>
-<div id="p7" class="page"><h1>Happy Birthday 🎂🎈<br>» દ્યુતિ સુંદર દત્તા</h1></div>
-<div id="p8" class="page"><h1>Happy Birthday 🎁🎈<br>» தியுதி சுந்தர் தத்தா</h1></div>
-<div id="p9" class="page"><h1>Happy Birthday 🎈🎂<br>» デュティ・スンダル・ダッタ</h1></div>
-<div id="p10" class="page"><h1>Happy Birthday 🎈🎂<br>» ديوتي سوندار داتا</h1></div>
-<div id="p11" class="page"><h1>Happy Birthday 🎈🎂<br>» Ντιούτι Σούνταρ Ντάτα</h1></div>
-<div id="p12" class="page"><h1>Happy Birthday 🎈🎂<br>» ଦ୍ୟୁତି ସୁନ୍ଦର ଦତ୍ତ</h1></div>
-
-<!-- COMPUTER -->
-<div id="p13" class="page">
-<h2>Happy Birthday 🎂🎈</h2>
-<p>01000100 01111001 01110101 01110100 ...</p>
-<button onclick="go(14)">Next</button>
 </div>
 
 <!-- IMAGE PAGE -->
-<div id="p14" class="page">
-  <!-- Image.jpg -->
-  <img src="photo.jpg" class="fullimg">
-  <br>
-  <button onclick="go(1)">Restart</button>
+<div id="imagePage" class="page">
+<div class="card">
+<img src="https://drive.google.com/uc?export=view&id=1u1UH9AGOvJ_ODhT-gQj51JrQMWtDmf9_">
+<button class="btn" onclick="nextPage('page1')">End</button>
+</div>
 </div>
 
 <script>
-function go(n){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('p'+n).classList.add('active');
+
+/* NAVIGATION */
+function nextPage(p){
+document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+document.getElementById(p).classList.add('active');
 }
 
-/* Balloon click */
-function boom(){
-  document.getElementById("text").innerHTML =
-  "🎉 Happy Birthday Dyuti Da 🎂🎈🎉";
-  fire();
+/* TYPE EFFECT */
+let txt="Hey ! Birthday boy there Is a surprise for you 🥳🎉";
+let i=0;
+function typing(){
+if(i<txt.length){
+document.getElementById("type").innerHTML+=txt.charAt(i);
+i++;
+setTimeout(typing,40);
+}
+}
+typing();
+
+/* WISHES */
+function wish(n){
+let t="";
+if(n==1)t="Happy Birthday 🎁🎈<br>» Dyuti Sundar Dutta";
+if(n==2)t="जन्मदिन का हार्दिक शुभकामनाएं 🎁🎈<br>» द्युति सुंदर दत्ता";
+if(n==3)t="শুভ জন্মদিন 🎁🎈<br>» দ্যুতি সুন্দর দত্ত";
+if(n==4)t="Happy Birthday 🎂🎈<br>» દ્યુતિ સુંદર દત્તા";
+if(n==5)t="Happy Birthday 🎁🎈<br>» தியுதி சுந்தர் தத்தா";
+if(n==6)t="Happy Birthday 🎈🎂<br>» デュティ・スンダル・ダッタ";
+if(n==7)t="Happy Birthday 🎈🎂<br>» ديوتي سوندار داتا";
+if(n==8)t="Happy Birthday 🎈🎂<br>» Ντιούτι Σούνταρ Ντάτα";
+if(n==9)t="Happy Birthday 🎈🎂<br>» ଦ୍ୟୁତି ସୁନ୍ଦର ଦତ୍ତ";
+if(n==10)t="Happy Birthday 🎂🎈<br>01000100 01111001 01110101";
+
+document.getElementById("wishText").innerHTML=t;
+nextPage('wishPage');
 }
 
-/* Fireworks */
-const c = document.getElementById("fireworks");
-const ctx = c.getContext("2d");
-
-c.width = window.innerWidth;
-c.height = window.innerHeight;
-
-function fire(){
-  for(let i=0;i<60;i++){
-    let x = c.width/2;
-    let y = c.height/2;
-    let dx = (Math.random()-0.5)*8;
-    let dy = (Math.random()-0.5)*8;
-    particle(x,y,dx,dy);
-  }
+/* BALLOONS */
+for(let i=0;i<30;i++){
+let b=document.createElement("div");
+b.className="balloon";
+b.style.left=Math.random()*100+"%";
+b.style.background=`hsl(${Math.random()*360},70%,60%)`;
+b.style.animationDuration=(6+Math.random()*6)+"s";
+document.body.appendChild(b);
 }
 
-function particle(x,y,dx,dy){
-  let life=50;
-  function draw(){
-    if(life<=0) return;
-    ctx.fillStyle="white";
-    ctx.fillRect(x,y,2,2);
-    x+=dx; y+=dy; life--;
-    requestAnimationFrame(draw);
-  }
-  draw();
+/* GLITTER */
+for(let i=0;i<60;i++){
+let s=document.createElement("div");
+s.className="sparkle";
+s.style.left=Math.random()*100+"%";
+s.style.top=Math.random()*100+"%";
+document.body.appendChild(s);
 }
+
+/* FIREWORK */
+for(let i=0;i<20;i++){
+let f=document.createElement("div");
+f.className="firework";
+f.style.left=Math.random()*100+"%";
+f.style.top=Math.random()*100+"%";
+document.body.appendChild(f);
+}
+
 </script>
 
 </body>
 </html>
-    
