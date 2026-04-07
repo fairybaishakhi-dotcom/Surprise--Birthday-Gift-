@@ -11,6 +11,7 @@ body{
     background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
     color:white;
     overflow:hidden;
+    front:bold
 }
 .page{display:none;height:100vh;justify-content:center;align-items:center;flex-direction:column;text-align:center;}
 .active{display:flex;}
@@ -28,19 +29,27 @@ h1{font-size:30px;}
 
 img{
     width:80%;
-    max-width:350px;
-    border-radius:15px;
+    max-width:400px;
+    border-radius:20px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- 🎵 MUSIC ADDED HERE -->
+<audio id="bgMusic" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
+
 <!-- PAGE 1 -->
 <div id="page1" class="page active">
-<h1>Hey ! Birthday boy there Is a surprise for you 🥳🎉</h1>
-<p>But first of all promise me you read all the slides</p>
-<button class="btn" onclick="nextPage('page2')">Agree</button>
+<h1>Welcome dear Birthday boy 😃🥳 
+     I have a surprise for you 👀🎁🎉</h1>
+<p>But first of all promise me 🫴🏻 you will read all the slides😊 </p>
+
+<!-- 🔁 BUTTON UPDATED -->
+<button class="btn" onclick="startMusic()">Agree</button>
 </div>
 
 <!-- PAGE 2 -->
@@ -67,7 +76,7 @@ img{
 
 <!-- IMAGE PAGE -->
 <div id="imagePage" class="page">
-<img src="https://drive.google.com/uc?export=view&id=1u1UH9AGOvJ_ODhT-gQj51JrQMWtDmf9_" />
+<img src=" https://digibouquet.vercel.app/bouquet/d61e13ba-598f-44fa-aeb3-d34625549529     " />
 <br>
 <button class="btn" onclick="nextPage('page1')">End</button>
 </div>
@@ -83,22 +92,28 @@ function nextPage(p){
     document.getElementById(p).classList.add('active');
 }
 
+/* 🎵 MUSIC FUNCTION ADDED */
+function startMusic(){
+    document.getElementById("bgMusic").play();
+    nextPage('page2');
+}
+
 /* SHOW WISH */
 function showWish(n){
     clicked.add(n);
     lastPage = "page2";
 
     let t="";
-    if(n==1)t="Happy Birthday 🎁🎈<br>» Dyuti Sundar Dutta";
-    if(n==2)t="जन्मदिन का हार्दिक शुभकामनाएं 🎁🎈<br>» द्युति सुंदर दत्ता";
-    if(n==3)t="শুভ জন্মদিন 🎁🎈<br>» দ্যুতি সুন্দর দত্ত";
-    if(n==4)t="Happy Birthday 🎂🎈<br>» દ્યુતિ સુંદર દત્તા";
-    if(n==5)t="Happy Birthday 🎁🎈<br>» தியுதி சுந்தர் தத்தா";
-    if(n==6)t="Happy Birthday 🎈🎂<br>» デュティ・スンダル・ダッタ";
-    if(n==7)t="Happy Birthday 🎈🎂<br>» ديوتي سوندار داتا";
-    if(n==8)t="Happy Birthday 🎈🎂<br>» Ντιούτι Σούνταρ Ντάτα";
-    if(n==9)t="Happy Birthday 🎈🎂<br>» ଦ୍ୟୁତି ସୁନ୍ଦର ଦତ୍ତ";
-    if(n==10)t="Happy Birthday 🎂🎈<br>01000100 01111001 01110101";
+    if(n==1)t="Happy Birthday 😊🎁🎈<br>» Mr.Dyuti Sunder Dutta";
+    if(n==2)t="जन्मदिन का हार्दिक शुभकामनाएं 😊🎁🎈<br>» द्युति सुंदर दत्ता";
+    if(n==3)t="শুভ জন্মদিন 😊🎁🎈<br>» শ্রী মান দ্যুতি সুন্দর দত্ত ";
+    if(n==4)t="Happy Birthday 😊🎂🎈<br>» દ્યુતિ સુંદર দત્તા";
+    if(n==5)t="Happy Birthday 😊🎁🎈<br>» தியுதி சுந்தர் தத்தா";
+    if(n==6)t="Happy Birthday 😊🎈🎂<br>» デュティ・スンダル・ダッタ";
+    if(n==7)t="Happy Birthday 😊🎂🎉✨<br>» ديوتي سوندار داتا";
+    if(n==8)t="Happy Birthday 😊🎂✨<br>» Ντιούτι Σούνταρ Ντάτα";
+    if(n==9)t="Happy Birthday 😊🎂🎈<br>» ଦ୍ୟୁତି ସୁନ୍ଦର ଦତ୍ତ";
+    if(n==10)t="Happy Birthday 😊🎂🎉<br>01000100 01111001 01110101";
 
     document.getElementById("wishText").innerHTML=t;
     nextPage('wishPage');
@@ -107,9 +122,9 @@ function showWish(n){
 /* NEXT LOGIC */
 function nextAfterWish(){
     if(clicked.size === 10){
-        nextPage('imagePage'); // only after all clicked
+        nextPage('imagePage');
     }else{
-        nextPage(lastPage); // go back to language page
+        nextPage(lastPage);
     }
 }
 
