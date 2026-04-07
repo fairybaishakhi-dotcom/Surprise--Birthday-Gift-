@@ -17,15 +17,15 @@ body{
 .active{display:flex;}
 
 .btn{
-    margin:10px;
-    padding:10px 20px;
+    margin:20px;
+    padding:20px 30px;
     background:#2196f3;
     border:none;
-    border-radius:8px;
+    border-radius:10px;
     color:white;
 }
 
-h1{font-size:30px;}
+h1{font-size:50px;front: bold;}
 
 img{
     width:80%;
@@ -73,12 +73,22 @@ img{
 <h1 id="wishText"></h1>
 <button class="btn" onclick="nextAfterWish()">Next</button>
 </div>
-
-<!-- IMAGE PAGE -->
 <div id="imagePage" class="page">
-<img src=" https://digibouquet.vercel.app/bouquet/d61e13ba-598f-44fa-aeb3-d34625549529     " />
-<br>
+
+<img src="YOUR_IMAGE_LINK_HERE">
+
+<br><br>
+
+<a href="https://digibouquet.vercel.app/bouquet/d61e13ba-598f-44fa-aeb3-d34625549529" 
+   target="_blank" 
+   class="btn">
+   🌸 Open Your Bouquet Surprise
+</a>
+
+<br><br>
+
 <button class="btn" onclick="nextPage('page1')">End</button>
+
 </div>
 
 <script>
