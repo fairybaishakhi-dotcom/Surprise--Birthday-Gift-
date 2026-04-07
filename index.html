@@ -1,71 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Birthday Surprise</title>
+<title>Royal Birthday Surprise</title>
 
 <style>
 body{
-  margin:0;
-  font-family:sans-serif;
-  background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
-  color:white;
+    margin:0;
+    font-family:sans-serif;
+    background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+    color:white;
 }
 
+/* PAGE */
 .page{
-  display:none;
-  min-height:100vh;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
-  padding:20px;
+    display:none;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
 }
 .active{display:flex;}
 
-#page1 h1{font-size:38px;}
-#page1 p{font-size:30px;}
-
-.btn{
-  display:block;
-  width:90%;
-  max-width:400px;
-  margin:12px auto;
-  padding:20px;
-  font-size:26px;
-  font-weight:bold;
-  background:#2196f3;
-  border:none;
-  border-radius:15px;
-  color:white;
+/* TEXT */
+#page1 h1{
+  font-size:42px;
+  line-height:1.5;
+}
+#page1 p{
+  font-size:20px;
 }
 
+/* BUTTON */
+.btn{
+    display:block;
+    width:90%;
+    max-width:400px;
+    margin:12px auto;
+    padding:20px;
+    font-size:22px;
+    font-weight:bold;
+    background:#2196f3;
+    border:none;
+    border-radius:12px;
+    color:white;
+    cursor:pointer;
+}
+
+#page1 .btn{
+    font-size:24px;
+    padding:22px;
+}
+
+/* IMAGE */
 img{
-  width:85%;
-  max-width:400px;
-  border-radius:20px;
+    width:85%;
+    max-width:420px;
+    border-radius:20px;
+}
+
+/* MOBILE */
+@media (max-width:600px){
+  #page1 h1{font-size:30px;}
+  #page1 p{font-size:18px;}
+  .btn{font-size:18px;padding:16px;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 BIRTHDAY MUSIC (PRELOAD FIX) -->
+<!-- 🎉 UPDATED BIRTHDAY MUSIC -->
 <audio id="bgMusic" loop preload="auto">
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b5e1a.mp3?filename=happy-birthday-254480.mp3" type="audio/mpeg">
 </audio>
 
 <!-- PAGE 1 -->
 <div id="page1" class="page active">
-<h1>Hey Birthday Boy 🎂🥳</h1>
-<p>I have a surprise for you 🎁</p>
-
-<button class="btn" onclick="startAll()">Agree</button>
+<h1>Welcome dear Birthday boy 😃🥳 <br> I have a surprise for you 👀🎁🎉</h1>
+<p>But first promise me you will read everything 😊</p>
+<button class="btn" onclick="startMusic()">Agree</button>
 </div>
 
 <!-- PAGE 2 -->
 <div id="page2" class="page">
-<p style="font-size:28px;">Click all options one by one</p>
+<p style="font-size:22px;">Click all options one by one</p>
 
 <button class="btn" onclick="showWish(1)">1. English</button>
 <button class="btn" onclick="showWish(2)">2. Hindi</button>
@@ -81,7 +103,7 @@ img{
 
 <!-- WISH PAGE -->
 <div id="wishPage" class="page">
-<h1 id="wishText"></h1>
+<h1 id="wishText" style="font-size:34px;"></h1>
 <button class="btn" onclick="nextAfterWish()">Next</button>
 </div>
 
@@ -92,16 +114,15 @@ img{
 
 <br><br>
 
-<p style="font-size:28px; max-width:400px; line-height:1.5;">
-This bouquet is made by me but I take the bouquet page link from another source and attached it to your surprise 💐
-</p>
-
-<br>
-
 <a href="https://digibouquet.vercel.app/bouquet/d61e13ba-598f-44fa-aeb3-d34625549529"
-target="_blank" class="btn">
- Click and Open Your Bouquet Surprise 🌸🎁🎉
+   target="_blank"
+   class="btn">
+   🌸 Open Your Bouquet Surprise
 </a>
+
+<br><br>
+
+<button class="btn" onclick="nextPage('page1')">End</button>
 
 </div>
 
@@ -109,19 +130,20 @@ target="_blank" class="btn">
 
 let clicked = new Set();
 
+/* NAV */
 function nextPage(p){
 document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
 document.getElementById(p).classList.add('active');
 }
 
-/* 🎵 STRONG PLAY FIX */
-function startAll(){
-let m = document.getElementById("bgMusic");
+/* 🎵 FIXED MUSIC PLAY */
+function startMusic(){
+let music = document.getElementById("bgMusic");
 
-m.play().catch(()=>{
-  m.muted = true;
-  m.play();
-  m.muted = false;
+music.play().catch(()=>{
+  music.muted = true;
+  music.play();
+  music.muted = false;
 });
 
 nextPage('page2');
@@ -131,11 +153,23 @@ nextPage('page2');
 function showWish(n){
 clicked.add(n);
 
-document.getElementById("wishText").innerHTML="Happy Birthday 🎂🎉";
+let t="";
+if(n==1)t="Happy Birthday 🎁🎈<br>» Mr. Dyuti Sunder Dutta";
+if(n==2)t="जन्मदिन मुबारक 🎁🎈<br>» द्युति सुंदर दत्ता";
+if(n==3)t="শুভ জন্মদিন 🎁🎈<br>» দ্যুতি সুন্দর দত্ত";
+if(n==4)t="Happy Birthday 🎂🎈<br>» દ્યુતિ સુંદર দত্তા";
+if(n==5)t="Happy Birthday 🎁🎈<br>» தியுதி சுந்தர் தத்தா";
+if(n==6)t="Happy Birthday 🎈🎂<br>» デュティ・スンダル・ダッタ";
+if(n==7)t="Happy Birthday 🎂🎉<br>» ديوتي سوندار داتا";
+if(n==8)t="Happy Birthday 🎂✨<br>» Ντιούτι Σούνταρ Ντάτα";
+if(n==9)t="Happy Birthday 🎂🎈<br>» ଦ୍ୟୁତି ସୁନ୍ଦର ଦତ୍ତ";
+if(n==10)t="Happy Birthday 🎂🎉<br>01000100 01111001 01110101";
 
+document.getElementById("wishText").innerHTML=t;
 nextPage('wishPage');
 }
 
+/* NEXT */
 function nextAfterWish(){
 if(clicked.size===10){
 nextPage('imagePage');
@@ -149,5 +183,4 @@ nextPage('page2');
 </body>
 </html>
 
-
-
+  
