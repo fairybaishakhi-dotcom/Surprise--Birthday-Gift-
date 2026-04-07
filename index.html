@@ -1,7 +1,8 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Royal Birthday Surprise</title>
 
 <style>
@@ -10,67 +11,75 @@ body{
     font-family:sans-serif;
     background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
     color:white;
-    front-weight: bold;
 }
-.page{display:none;height:100vh;justify-content:center;align-items:center;flex-direction:column;pedding:20px;text-align:center;}
-.active{display:flex;}
-    #page1 h1{
-        front-size:42px;
-        line-height: 1.4;
-    }
-    #page1 p{
-        front-size:20px;
-    }
 
+/* PAGE */
+.page{
+    display:none;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
+}
+.active{display:flex;}
+
+/* FIRST PAGE TEXT */
+#page1 h1{
+  font-size:45px;
+  line-height:1.5;
+}
+#page1 p{
+  font-size:22px;
+}
+
+/* BUTTON (BIGGER) */
 .btn{
     margin:20px;
-    padding:20px 30px;
-    front-size: 18px;
-    front-weight:bold;
+    padding:18px 35px;
+    font-size:20px;
+    font-weight:bold;
     background:#2196f3;
     border:none;
-    border-radius:10px;
+    border-radius:12px;
     color:white;
     cursor:pointer;
 }
 
-
-
+/* IMAGE */
 img{
-    width:80%;
-    max-width:400px;
+    width:85%;
+    max-width:420px;
     border-radius:20px;
 }
-    
+
+/* MOBILE */
 @media (max-width:600px){
-  #page1 h1{font-size:30px;}
+  #page1 h1{font-size:32px;}
   #page1 p{font-size:18px;}
-  .btn{font-size:16px;padding:14px 20px;}
+  .btn{font-size:18px;padding:15px 25px;}
 }
 </style>
 </head>
 
 <body>
 
-
-<!-- 🎵 MUSIC ADDED HERE -->
+<!-- 🎵 WORKING MUSIC -->
 <audio id="bgMusic" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
 
 <!-- PAGE 1 -->
 <div id="page1" class="page active">
-<h1>Welcome dear Birthday boy 😃🥳 
-     I have a surprise for you 👀🎁🎉</h1>
-<p>But first of all promise me 🫴🏻 you will read all the slides😊 </p>
-
-<!-- 🔁 BUTTON UPDATED -->
+<h1>Welcome dear Birthday boy 😃🥳 <br> I have a surprise for you 👀🎁🎉</h1>
+<p>But first promise me you will read everything 😊</p>
 <button class="btn" onclick="startMusic()">Agree</button>
 </div>
 
 <!-- PAGE 2 -->
 <div id="page2" class="page">
-<p>Click on every options one after another »</p>
+<p style="font-size:22px;">Click all options one by one</p>
 
 <button class="btn" onclick="showWish(1)">1. English</button>
 <button class="btn" onclick="showWish(2)">2. Hindi</button>
@@ -81,24 +90,26 @@ img{
 <button class="btn" onclick="showWish(7)">7. Arabic</button>
 <button class="btn" onclick="showWish(8)">8. Greek</button>
 <button class="btn" onclick="showWish(9)">9. Odia</button>
-<button class="btn" onclick="showWish(10)">10. Computer language 😉</button>
+<button class="btn" onclick="showWish(10)">10. Computer 😉</button>
 </div>
 
 <!-- WISH PAGE -->
 <div id="wishPage" class="page">
-<h1 id="wishText"></h1>
+<h1 id="wishText" style="font-size:35px;"></h1>
 <button class="btn" onclick="nextAfterWish()">Next</button>
 </div>
+
+<!-- FINAL PAGE -->
 <div id="imagePage" class="page">
 
-<img src="YOUR_IMAGE_LINK_HERE">
+<img src="https://via.placeholder.com/400">
 
 <br><br>
 
-<a href="https://digibouquet.vercel.app/bouquet/d61e13ba-598f-44fa-aeb3-d34625549529" 
-   target="_blank" 
+<a href="https://digibouquet.vercel.app/bouquet/d61e13ba-598f-44fa-aeb3-d34625549529"
+   target="_blank"
    class="btn">
-Click here and Open Your Bouquet Surprise 🌷
+   🌸 Open Your Bouquet Surprise
 </a>
 
 <br><br>
@@ -110,51 +121,51 @@ Click here and Open Your Bouquet Surprise 🌷
 <script>
 
 let clicked = new Set();
-let lastPage = "page2";
 
 /* NAV */
 function nextPage(p){
-    document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-    document.getElementById(p).classList.add('active');
+document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+document.getElementById(p).classList.add('active');
 }
 
-/* 🎵 MUSIC FUNCTION ADDED */
+/* MUSIC */
 function startMusic(){
-    document.getElementById("bgMusic").play();
-    nextPage('page2');
+let music = document.getElementById("bgMusic");
+music.play();
+nextPage('page2');
 }
 
-/* SHOW WISH */
+/* WISH */
 function showWish(n){
-    clicked.add(n);
-    lastPage = "page2";
+clicked.add(n);
 
-    let t="";
-    if(n==1)t="Happy Birthday 😊🎁🎈<br>» Mr.Dyuti Sunder Dutta";
-    if(n==2)t="जन्मदिन का हार्दिक शुभकामनाएं 😊🎁🎈<br>» द्युति सुंदर दत्ता";
-    if(n==3)t="শুভ জন্মদিন 😊🎁🎈<br>» শ্রী মান দ্যুতি সুন্দর দত্ত ";
-    if(n==4)t="Happy Birthday 😊🎂🎈<br>» દ્યુતિ સુંદર দત્તા";
-    if(n==5)t="Happy Birthday 😊🎁🎈<br>» தியுதி சுந்தர் தத்தா";
-    if(n==6)t="Happy Birthday 😊🎈🎂<br>» デュティ・スンダル・ダッタ";
-    if(n==7)t="Happy Birthday 😊🎂🎉✨<br>» ديوتي سوندار داتا";
-    if(n==8)t="Happy Birthday 😊🎂✨<br>» Ντιούτι Σούνταρ Ντάτα";
-    if(n==9)t="Happy Birthday 😊🎂🎈<br>» ଦ୍ୟୁତି ସୁନ୍ଦର ଦତ୍ତ";
-    if(n==10)t="Happy Birthday 😊🎂🎉<br>01000100 01111001 01110101";
+let t="";
+if(n==1)t="Happy Birthday 🎁🎈<br>» Mr. Dyuti Sunder Dutta";
+if(n==2)t="जन्मदिन मुबारक 🎁🎈<br>» द्युति सुंदर दत्ता";
+if(n==3)t="শুভ জন্মদিন 🎁🎈<br>» দ্যুতি সুন্দর দত্ত";
+if(n==4)t="Happy Birthday 🎂🎈<br>» દ્યુતિ સુંદર দત્તા";
+if(n==5)t="Happy Birthday 🎁🎈<br>» தியுதி சுந்தர் தத்தா";
+if(n==6)t="Happy Birthday 🎈🎂<br>» デュティ・スンダル・ダッタ";
+if(n==7)t="Happy Birthday 🎂🎉<br>» ديوتي سوندار داتا";
+if(n==8)t="Happy Birthday 🎂✨<br>» Ντιούτι Σούνταρ Ντάτα";
+if(n==9)t="Happy Birthday 🎂🎈<br>» ଦ୍ୟୁତି ସୁନ୍ଦର ଦତ୍ତ";
+if(n==10)t="Happy Birthday 🎂🎉<br>01000100 01111001 01110101";
 
-    document.getElementById("wishText").innerHTML=t;
-    nextPage('wishPage');
+document.getElementById("wishText").innerHTML=t;
+nextPage('wishPage');
 }
 
-/* NEXT LOGIC */
+/* NEXT */
 function nextAfterWish(){
-    if(clicked.size === 10){
-        nextPage('imagePage');
-    }else{
-        nextPage(lastPage);
-    }
+if(clicked.size===10){
+nextPage('imagePage');
+}else{
+nextPage('page2');
+}
 }
 
 </script>
 
 </body>
 </html>
+
