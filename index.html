@@ -10,32 +10,48 @@ body{
     font-family:sans-serif;
     background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
     color:white;
-    overflow:hidden;
-    front:bold
+    front-weight: bold;
 }
-.page{display:none;height:100vh;justify-content:center;align-items:center;flex-direction:column;text-align:center;}
+.page{display:none;height:100vh;justify-content:center;align-items:center;flex-direction:column;pedding:20px;text-align:center;}
 .active{display:flex;}
+    #page1 h1{
+        front-size:42px;
+        line-height: 1.4;
+    }
+    #page1 p{
+        front-size:20px;
+    }
 
 .btn{
     margin:20px;
     padding:20px 30px;
+    front-size: 18px;
+    front-weight:bold;
     background:#2196f3;
     border:none;
     border-radius:10px;
     color:white;
+    cursor:pointer;
 }
 
-h1{font-size:50px;front: bold;}
+
 
 img{
     width:80%;
     max-width:400px;
     border-radius:20px;
 }
+    
+@media (max-width:600px){
+  #page1 h1{font-size:30px;}
+  #page1 p{font-size:18px;}
+  .btn{font-size:16px;padding:14px 20px;}
+}
 </style>
 </head>
 
 <body>
+
 
 <!-- 🎵 MUSIC ADDED HERE -->
 <audio id="bgMusic" loop>
@@ -82,7 +98,7 @@ img{
 <a href="https://digibouquet.vercel.app/bouquet/d61e13ba-598f-44fa-aeb3-d34625549529" 
    target="_blank" 
    class="btn">
-   🌸 Open Your Bouquet Surprise
+Click here and Open Your Bouquet Surprise 🌷
 </a>
 
 <br><br>
