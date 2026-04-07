@@ -41,7 +41,7 @@ body{
     max-width:400px;
     margin:12px auto;
     padding:20px;
-    font-size:22px;
+    font-size:25px;
     font-weight:bold;
     background:#2196f3;
     border:none;
@@ -51,7 +51,7 @@ body{
 }
 
 #page1 .btn{
-    font-size:24px;
+    font-size:28px;
     padding:22px;
 }
 
@@ -66,7 +66,7 @@ img{
 @media (max-width:600px){
   #page1 h1{font-size:30px;}
   #page1 p{font-size:18px;}
-  .btn{font-size:18px;padding:16px;}
+  .btn{font-size:20px;padding:16px;}
 }
 </style>
 </head>
@@ -75,7 +75,7 @@ img{
 
 <!-- 🎉 UPDATED BIRTHDAY MUSIC -->
 <audio id="bgMusic" loop preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b5e1a.mp3?filename=happy-birthday-254480.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=happy-birthday-112194.mp3" type="audio/mpeg">
 </audio>
 
 <!-- PAGE 1 -->
@@ -107,24 +107,23 @@ img{
 <button class="btn" onclick="nextAfterWish()">Next</button>
 </div>
 
-<!-- FINAL PAGE -->
-<p style="font-size:20px; max-width:400px; line-height:1.6;">
-This bouquet is made by me 💐<br>
-I just took the bouquet link from another source and added it in my page for you ❤️
-</p>
+
+    <!-- FINAL PAGE -->
+<div id="imagePage" class="page">
+
+<img src="https://via.placeholder.com/400">
+
+<br><br>
+
+<p>This bouquet is made by me but I took the bouquet page link from another source and attached it to your surprise 💙</p>
 
 <br>
-
-
 
 <a href="https://digibouquet.vercel.app/bouquet/d61e13ba-598f-44fa-aeb3-d34625549529"
    target="_blank"
    class="btn">
-   🌸 Open Your Bouquet Surprise 
+   🌸 Open Your Bouquet Surprise
 </a>
-
-<br><br>
-
 
 </div>
 
@@ -142,10 +141,12 @@ document.getElementById(p).classList.add('active');
 function startMusic(){
 let music = document.getElementById("bgMusic");
 
+music.muted = false;
+music.volume = 1;
+
 music.play().catch(()=>{
-  music.muted = true;
-  music.play();
-  music.muted = false;
+    music.muted = true;
+    music.play();
 });
 
 nextPage('page2');
